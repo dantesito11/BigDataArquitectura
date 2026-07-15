@@ -38,6 +38,7 @@ Todo el contenido se ejecutara en codespace de github.
 2. Subir un archivo mayor a 128 MB a un sistema de srchivos distribuido (hdfs) 
 ```    >docker cp archivo.csv id_namenode:/home/     ``` <br>
 3. Validar configuraciones : replicas cada bloque de datos , cuantos bloques tiene el archivo ( a nivel de comandos y a nivel de entorno grafico)
+4. Validar comandos
 
 ### Error al subir cambios
 ```    $ git add . && git commit -m "update" && git push origin master     ``` <br>
