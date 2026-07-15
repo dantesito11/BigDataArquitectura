@@ -34,10 +34,10 @@ Todo el contenido se ejecutara en codespace de github.
 
 ## Retos
 
-8 Cambiar la cantidad de réplicas de un archivo
-```    >xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx     ``` <br>
-8 verificar la nueva configuracion 
-```    >xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx     ``` <br>
+1. Modificar el archivo  docker-compose-hadoop.yml para agregar un nodo datanode para tener 3 workers
+2. Subir un archivo mayor a 128 MB a un sistema de srchivos distribuido (hdfs) 
+```    >docker cp archivo.csv id_namenode:/home/     ``` <br>
+3. Validar configuraciones : replicas cada bloque de datos , cuantos bloques tiene el archivo ( a nivel de comandos y a nivel de entorno grafico)
 
 ### Error al subir cambios
 ```    $ git add . && git commit -m "update" && git push origin master     ``` <br>
