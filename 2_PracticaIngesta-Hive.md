@@ -57,7 +57,8 @@ Para exportar las tabla de la base de datos retail con sqoop ejecutar lo siguien
 
 # CAPA PROCESAMIENTO / CLEANSED / TRUSTED
 ## B . Hive
-Para poder trabajar con hive ingresamos al contenedor del hive-server. <br>
+Para poder trabajar con hive, asumimos que ya existe datos en HDFS y creams tablas externas, 
+a partir de un archivo HDFS. Para ello debemos :
 
 Abrir un terminal y copiar el archivo hive.hql a hive-server<br> 
 ```     >_ docker cp datanode/scripts/hive/hive.hql hive-server:/opt      ``` <br> 
