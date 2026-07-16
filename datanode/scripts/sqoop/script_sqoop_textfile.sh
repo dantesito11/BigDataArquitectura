@@ -6,7 +6,7 @@ sqoop import \
 --password=root \
 --table order_items \
 --as-textfile \
---target-dir=/user/datapath/datasets/order_items \
+--target-dir=/raw/mysql/order_items \
 --delete-target-dir > /tmp/log_order_items.log
 
 sqoop import \
@@ -15,7 +15,7 @@ sqoop import \
 --password=root \
 --table products \
 --as-textfile \
---target-dir=/user/datapath/datasets/products \
+--target-dir=/raw/mysql/products \
 --delete-target-dir > /tmp/log_products.log
 
 sqoop import \
@@ -24,7 +24,7 @@ sqoop import \
 --password=root \
 --table customers \
 --as-textfile \
---target-dir=/user/datapath/datasets/customers \
+--target-dir=/raw/mysql/customers \
 --delete-target-dir > /tmp/log_customer.log
 
 sqoop import \
@@ -33,7 +33,7 @@ sqoop import \
 --password=root \
 --table departments \
 --as-textfile \
---target-dir=/user/datapath/datasets/departments \
+--target-dir=/raw/mysql/departments \
 --delete-target-dir > /tmp/log_departments.log
 
 sqoop import \
@@ -42,7 +42,7 @@ sqoop import \
 --password=root \
 --table categories \
 --as-textfile \
---target-dir=/user/datapath/datasets/categories \
+--target-dir=/raw/mysql/categories \
 --delete-target-dir > /tmp/log_categories.log
 
 sqoop import \
@@ -51,7 +51,7 @@ sqoop import \
 --password=root \
 --table orders \
 --as-textfile \
---target-dir=/user/datapath/datasets/orders \
+--target-dir=/raw/mysql/orders \
 --delete-target-dir > /tmp/log_orders.log
 
 # sqoop import \
