@@ -88,7 +88,7 @@ Para ello creamos una tabla externa:
 Luego cargas los datos procesados 
 ```     >_INSERT OVERWRITE TABLE retail_db_cleansed.top10_productos SELECT p.product_name, SUM(oi.order_item_subtotal) AS total_ventas FROM retail_db_raw.order_items oi JOIN retail_db_raw.products p ON oi.order_item_product_id = p.product_id GROUP BY p.product_name ORDER BY total_ventas DESC LIMIT 10; ```   <br>
 
-# CAPA USUARIO
+# CAPA USUARIO / USER / PRESENTACION
 ###  Crear una base de datos emulando una capa de usuario en mysql
 Entrar a contenedor de mysql 
 ```     >_ mysql -u root -p ```<br>
@@ -101,23 +101,22 @@ Crear una base de datos realcional para el usuario
 Exportar el contenido de la capa cleansed a la capa usuario (mysql)
 ```     >_ sh /datanode/scripts/sqoop/script_sqoop_textfile_export.sh     ```<br>
 
+# PRACTICA 2  PIPELINE DATALAKE
 
+1 Descargar un set de datos o base de datos en formato csv
 
-#### ----------------------------- PRACTICA 2  -------------------------------------## 
-
-1 Descargar un set de datos en formato csv
-
-2 crear base de datos en mysql de su preferencia
+2 Crear base de datos en mysql de su preferencia
 
 3 Importar la base de datos con la herramienta adminer
 
-#### ---------------------------- PRACTICA 3 --------------------------------------##
-
-1 Importar la base de datos escogida a hdfs utilizando sqoop. Ayuda dentro de datanode
-```     >_ sh /datanode/scripts/sqoop/script_sqoop_textfile.sh    ``` <br> 
-2 Crear una tabla externa con hive. Ayuda dentro de hive-server
-```     >_ hive -f /opt/hive.hql    ``` <br> 
-3 Construye una agragacion (procesamiento) para la tabla externa
+4 CAPA RAW: Importar la base de datos escogida a hdfs utilizando sqoop. 
+Ayuda dentro de datanode
+```     >_ sh /datanode/scripts/sqoop/script_sqoop_textfile_nombre_diplomante.sh    ``` <br> 
+5 Crear una tabla externa con hive. 
+Ayuda dentro de hive-server
+```     >_ hive -f /opt/hive_nombre_diplomante.hql    ``` <br> 
+6 CAPA CLEANSED: Construye una agregacion (procesamiento) para la tabla externa
 ```     >_ hive     ``` <br> 
 ```     >_ select ... groupby     ``` <br> 
+7 CAPA USER: Exporte los agregados o procesamiento materizalizado en hdfs a mysql
 
