@@ -54,7 +54,6 @@ Validar los serviciso de la arquitectura
 Para exportar las tabla de la base de datos retail con sqoop ejecutar lo siguiente:<br>
 ```     >_ sh /datanode/scripts/sqoop/script_sqoop_textfile.sh     ```<br>
 ```     >_ sh /datanode/scripts/sqoop/script_sqoop_avro.sh     ``` <br>
-```     >_ hdfs dfs -put *.avsc /user/datapath/datasets/avro/     ```
 
 # CAPA PROCESAMIENTO / CLEANSED / TRUSTED
 ## B . Hive
