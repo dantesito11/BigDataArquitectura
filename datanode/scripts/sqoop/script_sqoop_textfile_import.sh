@@ -14,6 +14,7 @@ sqoop import \
 --username=root \
 --password=root \
 --table products \
+--columns product_id,product_category_id,product_name,product_description,product_price,product_image \
 --as-textfile \
 --target-dir=/raw/mysql/products \
 --delete-target-dir > /tmp/log_products.log
