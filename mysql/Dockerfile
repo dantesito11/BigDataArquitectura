@@ -1,4 +1,4 @@
-FROM mysql:latest
+FROM mysql:8.4
 WORKDIR /mysql/data
 ENV MYSQL_ROOT_PASSWORD=root
 #COPY data_warehouse_netflix.sql /docker-entrypoint-initdb.d/
