@@ -45,7 +45,11 @@ Para inicializar de auevo
 1 En el codespace
 ```    >_ docker rm -f $(docker ps -aq)     ``` <br>
 
+```    >_ docker system prune -af     ``` <br>
+
 ```    >_ docker network prune -f     ``` <br>
+
+
 
 
 # 3 Spark ingesta de Datos

@@ -1,0 +1,29 @@
+FROM python:3.7
+
+RUN apt-get update && \
+    apt-get install -y wget ca-certificates tar && \
+    rm -rf /var/lib/apt/lists/*
+
+# Instalar Java 8
+RUN wget -q https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u432-b06/OpenJDK8U-jdk_x64_linux_hotspot_8u432b06.tar.gz \
+    -O /tmp/java8.tar.gz && \
+    mkdir -p /opt/java && \
+    tar -xzf /tmp/java8.tar.gz -C /opt/java --strip-components=1 && \
+    rm /tmp/java8.tar.gz
+
+ENV JAVA_HOME=/opt/java
+ENV PATH=$JAVA_HOME/bin:$PATH
+
+
+RUN pip install \
+    jupyterlab \
+    pyspark==2.4.0 \
+    mysql-connector-python \
+    psycopg2-binary \
+    pymongo
+
+RUN mkdir -p /opt/spark/jars
+
+COPY jars/mysql-connector-j-8.4.0.jar /opt/spark/jars/
+
+WORKDIR /user/app
