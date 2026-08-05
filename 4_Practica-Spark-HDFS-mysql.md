@@ -1,4 +1,4 @@
-# LABORATORIO 3 SPARK
+# LABORATORIO 4 SPARK-HDFS-MYSQL
 ## Prerequisitos 
 # 1.- Actualizar cambios de repositorio
 1. Click en el repositorio , click en commit ahead o sync fork 
@@ -11,7 +11,7 @@
    
 6. Ejecutar el siguiente comando para desplegar los contenedores<br>
 
-```    >docker compose -f docker-compose-spark.yml up     ``` <br>
+```    >docker compose -f docker-compose-actualizado.yml up     ``` <br>
 
 # 2 Mysql
 Este contenedor contiene una base de datos llamada retail_db y consta de las siguientes tablas: <br>
@@ -33,14 +33,6 @@ port: 3310
 Ejecutar ifconfig en terminal para obtener la ip (eth0)
 
 # 3 Ayuda Docker
-Recreamos la imagen de mysql     
-
-```    >_ docker compose down mysql     ``` <br>
-
-```    >_ docker compose up -d --build mysql     ``` <br>
-
-```    >_ docker compose build --no-cache jupyter     ``` <br>
-
 Para inicializar de nuevo 
 1 Detén todos los contenedores:
 
@@ -76,7 +68,33 @@ Validacion
 
 ```    >_ docker network ls     ``` <br>
 
+# 4 Ayuda Docker modificar Dockerfile
+Forzar la reconstrucción en caso de modificar solo jupyter : 
+Reconstruye la imagen de jupyter.
+Recrea únicamente el contenedor jupyter.
+No afecta a Hadoop, Kafka, MySQL, etc.
+1. Opcion 1 LIviano , dado que solo reconstruye lo que fue adicionado 
+   
+```    >_ docker compose -f docker-compose-actualizado.yml up -d --build jupyter     ``` <br>
+
+2. Opcion 2 Ignorar la caché, es decir si realmente reconstruyre todo lo que esta en el archivo DockerFIile 
+
+```    >_ docker compose -f docker-compose-actualizado.yml build --no-cache jupyter     ``` <br>
+
+```    >_ docker compose -f docker-compose-actualizado.yml up -d jupyter     ``` <br>
+
+# 5 Ayuda Codespace
+Para inicializar de nuevo por eeroores de abrir un puerto
+
+1 Ejecuta:
+
+```    >_ Ctrl + Shift + P     ``` <br>
+
+2 Luego:
+
+```    >_ Developer: Reload Window     ``` <br>
 
 
 
-# 3 Spark ingesta de Datos
+# 6 Abrir el notebook
+
