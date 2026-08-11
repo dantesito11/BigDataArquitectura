@@ -2,43 +2,64 @@ import mysql.connector
 from kafka import KafkaProducer
 import json
 import time
-# ==================================================
-# MYSQL
-# ==================================================
+
+
 cnx = mysql.connector.connect(
     host="172.27.1.15",
     port=3306,
     user="root",
     password="root",
-    database="retail_db"
+    database="retail_db",
+    autocommit=True
 )
-cursor = cnx.cursor(dictionary=True)
-# ==================================================
-# KAFKA
-# ==================================================
+
+
 producer = KafkaProducer(
     bootstrap_servers="kafka:9092",
     value_serializer=lambda x:
         json.dumps(x, default=str).encode("utf-8")
 )
-# ==================================================
-# CONTROL DEL ULTIMO ID
-# ==================================================
-# ultimo_order_id = 68884
+
+
 ultimo_order_id = 68884
-ultimo_order_item_id = 172198
+ultimo_order_item_id = 172199
+
 
 print("Kafka Producer iniciado...")
-# ==================================================
-# LOOP
-# ==================================================
+
+
 while True:
-    
-    # ----------------------------
-    # Buscar nuevos orders
-    # ----------------------------
-    print("Buscando nuevos registros orders...")
-    
+
+    cursor = cnx.cursor(dictionary=True)
+
+
+    # Diagnóstico
+
+    cursor.execute("""
+        SELECT
+            @@hostname AS host,
+            DATABASE() AS db,
+            @@port AS port,
+            MAX(order_id) AS max_order
+        FROM orders
+    """)
+
+    print(
+        "MYSQL:",
+        cursor.fetchone()
+    )
+
+
+    print(
+        "Buscando desde order:",
+        ultimo_order_id,
+        "item:",
+        ultimo_order_item_id
+    )
+
+
+    # ORDERS
+
     cursor.execute(
         """
         SELECT
@@ -52,23 +73,35 @@ while True:
         """,
         (ultimo_order_id,)
     )
+
+
     orders = cursor.fetchall()
-    print("Orders encontrados:", len(orders))
-    
+
+
+    print(
+        "ORDERS ENCONTRADOS:",
+        len(orders)
+    )
+
+
     for order in orders:
+
         producer.send(
             "orders_topic",
             value=order
         )
+
         print(
             "Kafka orders:",
             order
         )
+
         ultimo_order_id = order["order_id"]
-    # ----------------------------
-    # Buscar order_items
-    # ----------------------------
-    print("Buscando nuevos registros order_items...")
+
+
+
+    # ITEMS
+
     cursor.execute(
         """
         SELECT
@@ -84,17 +117,28 @@ while True:
         """,
         (ultimo_order_item_id,)
     )
+
+
     items = cursor.fetchall()
-    print("Items encontrados:", len(items))
+
+
     for item in items:
+
         producer.send(
             "order_items_topic",
             value=item
         )
+
         print(
             "Kafka items:",
             item
         )
+
         ultimo_order_item_id = item["order_item_id"]
+
+
     producer.flush()
+
+    cursor.close()
+
     time.sleep(1)

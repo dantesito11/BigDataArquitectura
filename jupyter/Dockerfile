@@ -28,4 +28,4 @@ CMD ["jupyter", "lab", \
 
 RUN mkdir -p /opt/spark/jars
 
-COPY jars/mysql-connector-j-8.4.0.jar /opt/spark/jars/
+COPY jars/*.jar /opt/spark/jars/
